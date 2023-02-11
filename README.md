@@ -1,5 +1,7 @@
 # Game
-A mini dodge-to-survive type Space Game written in Java using java.awt and java.swing
-Currently there's only a stupid alien 👾 that you can control and move around in the frame...
-The game is still under progress...
-But there'll be much more to it in the future! 👾
+
+A mini dodge-to-survive type Game written in Java using mainly java.awt and java.swing
+
+👾 Dodge the obstacles to survive
+👾 The game is still under progress...
+👾 But there'll be much more to it in the future!
