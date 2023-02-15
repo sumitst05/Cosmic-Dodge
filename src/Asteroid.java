@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 public class Asteroid {
 	private int xPos;
     private int yPos = -20;
-    private int lato = 48;
+    private int lato = 35;
     
     Image asteroid = new ImageIcon("asteroid.png").getImage();
     
@@ -43,7 +43,7 @@ public class Asteroid {
     }
     
     public void drawAsteroid(Graphics g) {
-    	g.drawImage(asteroid, xPos, yPos, 50, 50, null);
+    	g.drawImage(asteroid, xPos, yPos, lato, lato, null);
     }
     
 }
