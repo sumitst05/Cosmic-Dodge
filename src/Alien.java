@@ -5,8 +5,8 @@ import javax.swing.ImageIcon;
 public class Alien {
 	Image alien = new ImageIcon("alien.png").getImage();
 	
-	private int xPos = 250;
-	private int yPos = 450;
+	private int xPos = 235;
+	private int yPos = 425;
 	private int width = 48;
     private int height = 48;
 	
