@@ -1,6 +1,6 @@
 # 👾 COSMIC DODGE 👾 - README
 
-This is a space game created using Java, mainly using the java.awt and java.swing libraries. In this game, the player controls an alien object that moves around in the game window. The objective is to dodge the randomly generated asteroid objects to survive as long as possible. The game ends when a collision between the alien and an asteroid is detected.
+This is a space game created using Java, mainly using the java.awt and java.swing libraries. In this game, the player controls an alien that moves around in the game window. The objective is to dodge the randomly generated asteroids to survive as long as possible. The game ends when a collision between the alien and an asteroid is detected.
 
 ![img](https://user-images.githubusercontent.com/106669732/219088546-effa0547-91f6-4b1c-a5fb-8b96dc549d83.png)
 
