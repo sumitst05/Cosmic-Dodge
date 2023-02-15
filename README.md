@@ -21,6 +21,11 @@ https://user-images.githubusercontent.com/106669732/219088937-1af8e044-aff2-4ef9
 ## Game Development
 The game is still under progress, and more features and improvements will be added in the future. 
 
+## Link to Replit
+You can also play this game on Replit without having to clone the repository.
+Just follow this link : ![Cosmic Dodge](https://replit.com/@sumitst05/Cosmic-Dodge?v=1)
+Do like the repl if you liked the game! 😉
+
 ## Contributing
 Contributions to the game are welcome. If you find a bug, have a suggestion or an improvement, please feel free to open an issue or submit a pull request.
 
