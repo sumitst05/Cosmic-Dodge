@@ -23,7 +23,7 @@ The game is still under progress, and more features and improvements will be add
 
 ## Link to Replit
 You can also play this game on Replit without having to clone the repository.
-Just follow this link : https://replit.com/@sumitst05/Cosmic-Dodge?v=1
+Just follow this link : [Cosmic Dodge](https://replit.com/@sumitst05/Cosmic-Dodge?v=1)
 Do like the repl if you liked the game! 😉
 
 ## Contributing
