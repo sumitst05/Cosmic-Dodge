@@ -10,8 +10,8 @@ To run the game, you will need to have Java 8 or higher installed on your comput
 3. Run the game using the `java` command.
 
 ## How to Play
-1. Use the arrow keys to control the movement of the alien object.
-2. Dodge the randomly generated asteroid objects to avoid collision.
+1. Use the arrow keys to control the movement of the alien.
+2. Dodge the randomly generated asteroids to avoid collision.
 3. The game ends when a collision is detected between the alien and an asteroid.
 
 ## Game Development
