@@ -21,4 +21,4 @@ The game is still under progress, and more features and improvements will be add
 Contributions to the game are welcome. If you find a bug, have a suggestion or an improvement, please feel free to open an issue or submit a pull request.
 
 ## License
-This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](LICENSE).
