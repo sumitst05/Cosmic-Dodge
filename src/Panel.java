@@ -9,8 +9,10 @@ public class Panel extends JPanel implements KeyListener {
 	private Timer timer = new Timer(1000, new TimerListener());
     private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
     private Random random = new Random();
-	
+	private Boolean collision = false;
+    
     Image background = new ImageIcon("bg.png").getImage();
+    Image gameOver = new ImageIcon("gameOver.png").getImage();
     
 	Panel() {
 		this.setBorder(BorderFactory.createLineBorder(Color.white));
@@ -27,12 +29,12 @@ public class Panel extends JPanel implements KeyListener {
 		for(Asteroid asteroid : list) {
 			int asteroidX1 = asteroid.getxPos();
 			int asteroidX2 = asteroidX1 + asteroid.getLato();
-			int asteroidY1 = asteroid.getyPos();
-			int asteroidY2 = asteroidY1 + asteroid.getLato();
+			int asteroidY = asteroid.getyPos();
 			if(((asteroidX1 >= alienX1 && asteroidX1 <= alienX2) || (asteroidX2 >= alienX1 && asteroidX2 <= alienX2))
-				&& (asteroidY1 >= alienY1  && asteroidY1 <= alienY2)) { 
+				&& (asteroidY >= alienY1  && asteroidY <= alienY2)) {
 				timer.stop();
 				this.removeKeyListener(this);
+				collision = true;
 			}
 		}
 	}
@@ -46,6 +48,9 @@ public class Panel extends JPanel implements KeyListener {
             asteroid.drawAsteroid(g);
         }
 		repaint();
+		if(collision == true) {
+			g.drawImage(gameOver, 175, 175, 150, 150, null);
+		}
 	}
 	
 	@Override
