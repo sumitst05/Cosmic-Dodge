@@ -1,15 +1,17 @@
 # 👾 COSMIC DODGE 👾 - README
 
-This is a space game created using Java, mainly using the java.awt and java.swing libraries. In this game, the player controls an alien that moves around in the game window. The objective is to dodge the randomly generated asteroids to survive as long as possible. The game ends when a collision between the alien and an asteroid is detected.
+This is a space game created using Java, mainly using the java.awt and java.swing libraries. In this game, the player controls an alien that moves around in the game window. The objective is to dodge the randomly generated asteroids to survive as long as possible. The game ends when a collision between the alien and asteroid is detected.
 
 ![img](https://user-images.githubusercontent.com/106669732/219088546-effa0547-91f6-4b1c-a5fb-8b96dc549d83.png)
 
 ## Getting Started
 To run the game, you will need to have Java 8 or higher installed on your computer. 
 
-1. Download the source code from the repository
-2. Compile the code using the `javac` command. 
-3. Run the game using the `java` command.
+1. Download the source code from the repository and cd to Cosmic-Dodge/src
+2. Compile the code using the `javac CosmicDodge.java` command. 
+3. Run the game using the `java CosmicDodge` command.
+
+In case you get a blank window after compiling and running, make sure to move the .png files to the location where the .class files are generated.
 
 ## How to Play
 1. Use the arrow keys to control the movement of the alien.
@@ -23,7 +25,7 @@ The game is still under progress, and more features and improvements will be add
 
 ## Link to Replit
 You can also play this game on Replit without having to clone the repository.
-Just follow this link : [Cosmic-Dodge](https://replit.com/@sumitst05/Cosmic-Dodge?v=1). (Just make sure to go fullscreen before you run the repl). 
+Just follow this link : [Cosmic-Dodge](https://replit.com/@sumitst05/Cosmic-Dodge?v=1). (Just make sure to go full-screen before you run the repl). 
 Do like the repl if you liked the game! 😉
 
 ## Contributing
