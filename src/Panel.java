@@ -10,16 +10,16 @@ public class Panel extends JPanel implements KeyListener, Runnable {
 	// Initializing Objects
 	private Alien alien = new Alien();
 	private Timer timer = new Timer(1000, new TimerListener());
-    private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
-    private Random random = new Random();
+  private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
+  private Random random = new Random();
 	private Boolean collision = false;
     
-    private Image background = new ImageIcon("bg.png").getImage();	//background image
-    private Image gameOver = new ImageIcon("gameOver.png").getImage();	//for game over prompt
+  private Image background = new ImageIcon("bg.png").getImage();	//background image
+  private Image gameOver = new ImageIcon("gameOver.png").getImage();	//for game over prompt
     
-    public Boolean running = false;
+  public Boolean running = false;
     
-    //Panel constructor
+  //Panel constructor
 	public Panel() {
 		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		this.setFocusable(true);
@@ -54,8 +54,8 @@ public class Panel extends JPanel implements KeyListener, Runnable {
 		g.drawImage(background, 0, 0, null);
 		alien.drawAlien(g);
 		for (Asteroid asteroid : list) {
-            asteroid.drawAsteroid(g);
-        }
+      asteroid.drawAsteroid(g);
+    }
 		repaint();
 		// prompt the game over image if collision is true
 		if(collision == true) {
@@ -91,11 +91,11 @@ public class Panel extends JPanel implements KeyListener, Runnable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Integer x = random.nextInt(454);
-            list.add(new Asteroid(x));
-            for(Asteroid asteroid : list) {
-                asteroid.moveDown();
-                checkCollision();	// check collision every time
-            }
+      list.add(new Asteroid(x));
+    	for(Asteroid asteroid : list) {
+      	asteroid.moveDown();
+          checkCollision();	// check collision every time
+      }
 		}
 	}
 
