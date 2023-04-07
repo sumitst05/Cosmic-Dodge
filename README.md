@@ -8,8 +8,14 @@ This is a space game created using Java, mainly using the java.awt and java.swin
 To run the game, you will need to have Java 8 or higher installed on your computer. 
 
 1. Download the source code from the repository and cd to Cosmic-Dodge/src
-2. Compile the code using the `javac CosmicDodge.java` command. 
-3. Run the game using the `java CosmicDodge` command.
+2. Compile the code using 
+```bash 
+javac CosmicDodge.java
+```
+3. Run the game using 
+```bash
+java CosmicDodge
+```
 
 In case you get a blank window after compiling and running, make sure to move the .png files to the location where the .class files are generated.
 
