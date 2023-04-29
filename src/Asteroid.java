@@ -7,7 +7,7 @@ public class Asteroid {
 	private int yPos = -20;
 	private int lato = 35; // for speed and size of asteroid
 
-	Image asteroid = new ImageIcon("asteroid.png").getImage();
+	Image asteroid = new ImageIcon("assets/asteroid.png").getImage();
 
 	// Constructor
 	public Asteroid(int xPos) {

@@ -3,7 +3,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Alien {
-	Image alien = new ImageIcon("alien.png").getImage();
+	Image alien = new ImageIcon("assets/alien.png").getImage();
 
 	private int xPos = 235;
 	private int yPos = 425;

@@ -14,8 +14,8 @@ public class Panel extends JPanel implements KeyListener {
 	private Random random = new Random();
 	private Boolean collision = false;
 
-	private Image background = new ImageIcon("bg.png").getImage(); // background image
-	private Image gameOver = new ImageIcon("gameOver.png").getImage(); // for game over prompt
+	private Image background = new ImageIcon("assets/bg.png").getImage(); // background image
+	private Image gameOver = new ImageIcon("assets/gameOver.png").getImage(); // for game over prompt
 
 	// Panel constructor
 	public Panel() {
