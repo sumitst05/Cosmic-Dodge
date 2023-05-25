@@ -4,7 +4,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.Timer;
 
-public class Panel extends JPanel implements KeyListener {
+public class Panel extends JPanel implements KeyListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 
 	// Initializing Objects
@@ -13,6 +13,7 @@ public class Panel extends JPanel implements KeyListener {
 	private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
 	private Random random = new Random();
 	private Boolean collision = false;
+	private Boolean game_over = false;
 
 	private Image background = new ImageIcon("assets/bg.png").getImage(); // background image
 	private Image gameOver = new ImageIcon("assets/gameOver.png").getImage(); // for game over prompt
@@ -22,6 +23,7 @@ public class Panel extends JPanel implements KeyListener {
 		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		this.setFocusable(true);
 		this.addKeyListener(this);
+		this.addMouseListener(this);
 		timer.start();
 	}
 
@@ -57,28 +59,52 @@ public class Panel extends JPanel implements KeyListener {
 		repaint();
 		// prompt the game over image if collision is true
 		if (collision == true) {
-			g.drawImage(gameOver, 175, 175, 150, 150, null);
+			g.drawImage(gameOver, 175, 145, 150, 150, null);
+			game_over = true;
+		}
+
+		if (game_over) {
+      // Display game over prompt and "Play Again" option
+      g.setColor(Color.WHITE);
+			g.drawRect(getWidth() / 2 - 50, getHeight() / 2 + 50, 100, 40);
+			g.setFont(new Font("Arial", Font.BOLD, 18));
+			String playAgainText = "Play Again";
+			int playAgainTextWidth = g.getFontMetrics().stringWidth(playAgainText);
+			g.drawString(playAgainText, getWidth() / 2 - playAgainTextWidth / 2, getHeight() / 2 + 75);
 		}
 	}
+
+	private void resetGame() {
+    alien.setxPos(235);
+    alien.setyPos(425);
+
+    // Clear lists
+    list.clear();
+
+    // Initialize game state
+    collision = false;
+    game_over = false;
+    timer.start();
+
+		this.addKeyListener(this);
+		this.addMouseListener(this);
+	}
+
 
 	// Key Listener
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			alien.moveUp();
-			checkCollision();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			alien.moveDown();
-			checkCollision();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			alien.moveLeft();
-			checkCollision();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			alien.moveRight();
-			checkCollision();
 		}
 	}
 
@@ -88,6 +114,36 @@ public class Panel extends JPanel implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+	}
+
+	// Mouse Listener
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    if (game_over) {
+      // Handle "Play Again" option
+    	int playAgainButtonX = getWidth() / 2 - 50;
+      int playAgainButtonY = getHeight() / 2 + 50;
+      int playAgainButtonWidth = 100;
+      int playAgainButtonHeight = 40;
+      
+      if (e.getX() >= playAgainButtonX && e.getX() <= playAgainButtonX + playAgainButtonWidth &&
+					e.getY() >= playAgainButtonY && e.getY() <= playAgainButtonY + playAgainButtonHeight) {
+      	resetGame();
+			}
+		}
+  }
+
+	@Override
+  public void mouseExited(MouseEvent e) {
+  }
+	@Override
+  public void mouseEntered(MouseEvent e) {
+	}
+	@Override
+  public void mousePressed(MouseEvent e) {
+	}
+	@Override
+  public void mouseReleased(MouseEvent e) {
 	}
 
 	// Timer Listener to generate asteroids randomly
