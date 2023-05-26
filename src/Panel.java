@@ -7,13 +7,17 @@ import javax.swing.Timer;
 public class Panel extends JPanel implements KeyListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 
-	// Initializing Objects
-	private Alien alien = new Alien();
-	private Timer timer = new Timer(1000, new TimerListener());
-	private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
-	private Random random = new Random();
+	private int timeInterval = 500;
+	private int score = 0;
 	private Boolean collision = false;
 	private Boolean game_over = false;
+	private Boolean isMousePressed = false;
+ 
+	// Initializing Objects
+	private Alien alien = new Alien();
+	private Timer timer = new Timer(timeInterval, new TimerListener());
+	private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
+	private Random random = new Random();
 
 	private Image background = new ImageIcon("assets/bg.png").getImage(); // background image
 	private Image gameOver = new ImageIcon("assets/gameOver.png").getImage(); // for game over prompt
@@ -64,14 +68,37 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 		}
 
 		if (game_over) {
-      // Display game over prompt and "Play Again" option
-      g.setColor(Color.WHITE);
+			int playAgainButtonX = getWidth() / 2 - 50;
+      int playAgainButtonY = getHeight() / 2 + 50;
+      int playAgainButtonWidth = 100;
+      int playAgainButtonHeight = 40;
+      
+			// Displays game over prompt and "Play Again" option
+			
+			if(isMousePressed)
+				g.setColor(Color.WHITE);
+			else 
+				g.setColor(Color.CYAN);
+
+			g.fillRect(playAgainButtonX, playAgainButtonY, playAgainButtonWidth, playAgainButtonHeight);
+    	g.drawRect(playAgainButtonX, playAgainButtonY, playAgainButtonWidth, playAgainButtonHeight);
 			g.drawRect(getWidth() / 2 - 50, getHeight() / 2 + 50, 100, 40);
 			g.setFont(new Font("Arial", Font.BOLD, 18));
 			String playAgainText = "Play Again";
 			int playAgainTextWidth = g.getFontMetrics().stringWidth(playAgainText);
+
+			if(isMousePressed)
+				g.setColor(Color.BLACK);
+			else 
+				g.setColor(Color.BLACK);
 			g.drawString(playAgainText, getWidth() / 2 - playAgainTextWidth / 2, getHeight() / 2 + 75);
-		}
+
+			}
+		// Displays the score
+  	g.setColor(Color.WHITE);
+ 	  g.setFont(new Font("Arial", Font.BOLD, 18));
+	  String scoreText = "Score: " + score * timeInterval / 1000;
+  	g.drawString(scoreText, 10, 30);
 	}
 
 	private void resetGame() {
@@ -84,6 +111,7 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     // Initialize game state
     collision = false;
     game_over = false;
+		score = 0;
     timer.start();
 
 		this.addKeyListener(this);
@@ -136,14 +164,19 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 	@Override
   public void mouseExited(MouseEvent e) {
   }
+
 	@Override
   public void mouseEntered(MouseEvent e) {
 	}
+
 	@Override
   public void mousePressed(MouseEvent e) {
+		isMousePressed = true;
 	}
+
 	@Override
   public void mouseReleased(MouseEvent e) {
+		isMousePressed = false;
 	}
 
 	// Timer Listener to generate asteroids randomly
@@ -156,6 +189,7 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 				asteroid.moveDown();
 				checkCollision(); // check collision every time
 			}
+			score++;
 		}
 	}
 }
