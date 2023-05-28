@@ -9,25 +9,32 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 
 	private int timeInterval = 500;
 	private int score = 0;
-	private Boolean collision = false;
-	private Boolean game_over = false;
-	private Boolean isMousePressed = false;
+	private boolean collision = false;
+	private boolean game_over = false;
+	private boolean inMenu = true;
+	private boolean isPlayButtonPressed = false;
+	private boolean isQuitButtonPressed = false;
+
  
 	// Initializing Objects
 	private Alien alien = new Alien();
 	private Timer timer = new Timer(timeInterval, new TimerListener());
 	private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
 	private Random random = new Random();
+	private Rectangle playButtonBounds = new Rectangle(200, 200, 200, 50);
+  private Rectangle quitButtonBounds = new Rectangle(200, 260, 200, 50);
 
 	private Image background = new ImageIcon("assets/bg.png").getImage(); // background image
 	private Image gameOver = new ImageIcon("assets/gameOver.png").getImage(); // for game over prompt
 
 	// Panel constructor
 	public Panel() {
+		this.setLayout(null);
 		this.setBorder(BorderFactory.createLineBorder(Color.white));
 		this.setFocusable(true);
 		this.addKeyListener(this);
 		this.addMouseListener(this);
+
 		timer.start();
 	}
 
@@ -56,44 +63,79 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.drawImage(background, 0, 0, null);
-		alien.drawAlien(g);
-		for (Asteroid asteroid : list) {
-			asteroid.drawAsteroid(g);
+
+		if(!inMenu && !game_over) {
+			alien.drawAlien(g);
+			for (Asteroid asteroid : list) {
+				asteroid.drawAsteroid(g);
+			}
 		}
 		repaint();
+
 		// prompt the game over image if collision is true
 		if (collision == true) {
 			g.drawImage(gameOver, 175, 145, 150, 150, null);
 			game_over = true;
+			inMenu = true;
 		}
 
-		if (game_over) {
-			int playAgainButtonX = getWidth() / 2 - 50;
-      int playAgainButtonY = getHeight() / 2 + 50;
-      int playAgainButtonWidth = 100;
-      int playAgainButtonHeight = 40;
-      
-			// Displays game over prompt and "Play Again" option
+		if (game_over || inMenu) {
+			int playButtonX = getWidth() / 2 - 50;
+      int playButtonY = getHeight() / 2 + 50;
+			int quitButtonX = playButtonX;
+      int quitButtonY = playButtonY + 50;
+
+      int ButtonWidth = 100;
+      int ButtonHeight = 40;
 			
-			if(isMousePressed)
+			// Play Button
+			if(isPlayButtonPressed) {
 				g.setColor(Color.WHITE);
-			else 
-				g.setColor(Color.CYAN);
-
-			g.fillRect(playAgainButtonX, playAgainButtonY, playAgainButtonWidth, playAgainButtonHeight);
-    	g.drawRect(playAgainButtonX, playAgainButtonY, playAgainButtonWidth, playAgainButtonHeight);
-			g.drawRect(getWidth() / 2 - 50, getHeight() / 2 + 50, 100, 40);
-			g.setFont(new Font("Arial", Font.BOLD, 18));
-			String playAgainText = "Play Again";
-			int playAgainTextWidth = g.getFontMetrics().stringWidth(playAgainText);
-
-			if(isMousePressed)
-				g.setColor(Color.BLACK);
-			else 
-				g.setColor(Color.BLACK);
-			g.drawString(playAgainText, getWidth() / 2 - playAgainTextWidth / 2, getHeight() / 2 + 75);
-
 			}
+			else {
+				g.setColor(Color.CYAN);
+			}
+			g.fillRect(playButtonX, playButtonY, ButtonWidth, ButtonHeight);
+    	g.drawRect(playButtonX, playButtonY, ButtonWidth, ButtonHeight);
+			g.setFont(new Font("Arial", Font.BOLD, 18));
+			String playText = "Play";
+			int playTextWidth = g.getFontMetrics().stringWidth(playText);
+
+      int playTextX = playButtonX + ButtonWidth / 2 - playTextWidth / 2; // Calculate the x-coordinate for centering the text
+      int playTextY = playButtonY + ButtonHeight / 2 + 5; // Adjust the y-coordinate for centering the text
+
+			if(isPlayButtonPressed) {
+				g.setColor(Color.RED);
+				inMenu = false;
+			}
+			else {
+				g.setColor(Color.BLACK);
+			}
+      g.drawString(playText, playTextX, playTextY);
+
+			// Quit Button
+    	if (isQuitButtonPressed) {
+    		g.setColor(Color.WHITE);
+   		} else {
+      	g.setColor(Color.CYAN);
+    	}
+    	g.fillRect(quitButtonX, quitButtonY, ButtonWidth, ButtonHeight);
+    	g.drawRect(quitButtonX, quitButtonY, ButtonWidth, ButtonHeight);
+    	g.setFont(new Font("Arial", Font.BOLD, 18));
+    	String quitText = "Quit";
+    	int quitTextWidth = g.getFontMetrics().stringWidth(quitText);
+    	int quitTextX = quitButtonX + ButtonWidth / 2 - quitTextWidth / 2;
+    	int quitTextY = quitButtonY + ButtonHeight / 2 + 5;
+
+    	if (isQuitButtonPressed) {
+      	g.setColor(Color.RED);
+				System.exit(0);
+    	} else {
+      	g.setColor(Color.BLACK);
+    	}
+    	g.drawString(quitText, quitTextX, quitTextY);
+		}
+
 		// Displays the score
   	g.setColor(Color.WHITE);
  	  g.setFont(new Font("Arial", Font.BOLD, 18));
@@ -124,15 +166,19 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			alien.moveUp();
+      checkCollision();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			alien.moveDown();
+      checkCollision();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			alien.moveLeft();
+      checkCollision();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			alien.moveRight();
+      checkCollision();
 		}
 	}
 
@@ -148,15 +194,21 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
   @Override
   public void mouseClicked(MouseEvent e) {
     if (game_over) {
-      // Handle "Play Again" option
-    	int playAgainButtonX = getWidth() / 2 - 50;
-      int playAgainButtonY = getHeight() / 2 + 50;
-      int playAgainButtonWidth = 100;
-      int playAgainButtonHeight = 40;
+      // Handle menu options
+    	int playButtonX = getWidth() / 2 - 50;
+      int playButtonY = getHeight() / 2 + 50;
+			int quitButtonX = playButtonX;
+			int quitButtonY = playButtonY + 50;
+
+      int ButtonWidth = 100;
+      int ButtonHeight = 40;
       
-      if (e.getX() >= playAgainButtonX && e.getX() <= playAgainButtonX + playAgainButtonWidth &&
-					e.getY() >= playAgainButtonY && e.getY() <= playAgainButtonY + playAgainButtonHeight) {
+      if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
+					e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
       	resetGame();
+			} else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
+					e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
+				System.exit(0);
 			}
 		}
   }
@@ -171,25 +223,62 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 
 	@Override
   public void mousePressed(MouseEvent e) {
-		isMousePressed = true;
+		int playButtonX = getWidth() / 2 - 50;
+    int playButtonY = getHeight() / 2 + 50;
+		int quitButtonX = playButtonX;
+		int quitButtonY = playButtonY + 50;
+		
+    int ButtonWidth = 100;
+    int ButtonHeight = 40;
+
+    if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
+        e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
+    	isPlayButtonPressed = true;
+    } else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
+        e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
+			isQuitButtonPressed = true;
+		}
 	}
 
 	@Override
   public void mouseReleased(MouseEvent e) {
-		isMousePressed = false;
+		int playButtonX = getWidth() / 2 - 50;
+    int playButtonY = getHeight() / 2 + 50;
+		int quitButtonX = playButtonX;
+		int quitButtonY = playButtonY + 50;
+
+    int ButtonWidth = 100;
+    int ButtonHeight = 40;
+
+    if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
+        e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
+    	isPlayButtonPressed = false;
+    } else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
+        e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
+			isQuitButtonPressed = false;
+		}
 	}
 
 	// Timer Listener to generate asteroids randomly
 	public class TimerListener implements ActionListener {
+		private int asteroidSpacing = 2; // Adjust the spacing between asteroids
+    private int counter = 0; // Counter for asteroidSpacing
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Integer x = random.nextInt(454);
-			list.add(new Asteroid(x));
-			for (Asteroid asteroid : list) {
-				asteroid.moveDown();
-				checkCollision(); // check collision every time
+			if(!inMenu) {
+				counter++;
+      	// Check if the counter has reached the desired spacing value
+    		if (counter >= asteroidSpacing) {
+        	Integer x = random.nextInt(454);
+	      	list.add(new Asteroid(x));
+        	counter = 0; // Reset the counter
+      	}        
+      	for (Asteroid asteroid : list) {
+					checkCollision(); // check collisions everytime
+        	asteroid.moveDown();
+      	}
+      	score++;
 			}
-			score++;
 		}
 	}
 }
