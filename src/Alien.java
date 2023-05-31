@@ -4,8 +4,8 @@ import javax.swing.ImageIcon;
 
 public class Alien {
     private Image alien = new ImageIcon("assets/alien.png").getImage();
-    private int xPos = 235;
-    private int yPos = 425;
+    private int xPos = 124;
+    private int yPos = 544;
     private int width = 48;
     private int height = 48;
 
@@ -44,28 +44,28 @@ public class Alien {
 
     // Alien movement controls
     public void moveUp() {
-        yPos -= 20;
+        yPos -= 5;
         if (yPos < 0) {
             yPos = 0;
         }
     }
 
     public void moveDown() {
-        yPos += 20;
-        if (yPos > 454) {
-            yPos = 454;
+        yPos += 5;
+        if (yPos > 600) {
+            yPos = 600;
         }
     }
 
     public void moveRight() {
-        xPos += 20;
-        if (xPos > 454) {
-            xPos = 454;
+        xPos += 5;
+        if (xPos > 294) {
+            xPos = 294;
         }
     }
 
     public void moveLeft() {
-        xPos -= 20;
+        xPos -= 5;
         if (xPos < 0) {
             xPos = 0;
         }
