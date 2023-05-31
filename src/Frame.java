@@ -6,7 +6,7 @@ public class Frame extends JFrame {
 	// create game window
 	public Frame(Panel panel) {
 		this.setTitle("COSMIC DODGE");
-		this.setSize(500, 500);
+		this.setSize(300, 600);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.add(panel);

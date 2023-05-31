@@ -6,7 +6,6 @@ public class Asteroid {
     private int xPos;
     private int yPos = -20;
     private int lato = 35; // for size of asteroid
-    private int speed = 40; // for asteroid movement speed
 
     Image asteroid = new ImageIcon("assets/asteroid.png").getImage();
 
@@ -41,16 +40,8 @@ public class Asteroid {
         this.lato = lato;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
     public void moveDown() {
-        yPos += speed;
+        yPos += 40;
     }
 
     // Draw asteroid

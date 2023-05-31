@@ -7,23 +7,22 @@ import javax.swing.Timer;
 public class Panel extends JPanel implements KeyListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 
-	private int timeInterval = 500;
+	private int timeInterval = 450;
 	private int score = 0;
 	private boolean collision = false;
 	private boolean game_over = false;
 	private boolean inMenu = true;
 	private boolean isPlayButtonPressed = false;
 	private boolean isQuitButtonPressed = false;
-
+	private boolean isSettingsButtonPressed = false;
  
 	// Initializing Objects
 	private Alien alien = new Alien();
 	private Timer timer = new Timer(timeInterval, new TimerListener());
 	private ArrayList<Asteroid> list = new ArrayList<Asteroid>();
 	private Random random = new Random();
-	private Rectangle playButtonBounds = new Rectangle(200, 200, 200, 50);
-  private Rectangle quitButtonBounds = new Rectangle(200, 260, 200, 50);
 
+	private Image logo = new ImageIcon("assets/logo.png").getImage();		// logo
 	private Image background = new ImageIcon("assets/bg.png").getImage(); // background image
 	private Image gameOver = new ImageIcon("assets/gameOver.png").getImage(); // for game over prompt
 
@@ -73,18 +72,23 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 		repaint();
 
 		// prompt the game over image if collision is true
-		if (collision == true) {
-			g.drawImage(gameOver, 175, 145, 150, 150, null);
+		if (collision) {
+			g.drawImage(gameOver, 75, 150, 150, 150, null);
 			game_over = true;
 			inMenu = true;
 		}
+		
+		if(inMenu && !collision) g.drawImage(logo, 4, 145, 494, 90, null);	// show game logo
 
 		if (game_over || inMenu) {
+			
 			int playButtonX = getWidth() / 2 - 50;
       int playButtonY = getHeight() / 2 + 50;
-			int quitButtonX = playButtonX;
-      int quitButtonY = playButtonY + 50;
-
+			int settingsButtonX = playButtonX;
+			int settingsButtonY = playButtonY + 50;
+			int quitButtonX = settingsButtonX;
+      int quitButtonY = settingsButtonY + 50;
+			
       int ButtonWidth = 100;
       int ButtonHeight = 40;
 			
@@ -112,6 +116,28 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 				g.setColor(Color.BLACK);
 			}
       g.drawString(playText, playTextX, playTextY);
+
+			// Settings Button
+    	if (isSettingsButtonPressed) {
+    		g.setColor(Color.WHITE);
+   		} else {
+      	g.setColor(Color.CYAN);
+    	}
+    	g.fillRect(settingsButtonX, settingsButtonY, ButtonWidth, ButtonHeight);
+    	g.drawRect(settingsButtonX, settingsButtonY, ButtonWidth, ButtonHeight);
+    	g.setFont(new Font("Arial", Font.BOLD, 18));
+    	String settingsText = "Settings";
+    	int settingsTextWidth = g.getFontMetrics().stringWidth(settingsText);
+    	int settingsTextX = settingsButtonX + ButtonWidth / 2 - settingsTextWidth / 2;
+    	int settingsTextY = settingsButtonY + ButtonHeight / 2 + 5;
+
+    	if (isSettingsButtonPressed) {
+      	g.setColor(Color.RED);
+				System.exit(0);
+    	} else {
+      	g.setColor(Color.BLACK);
+    	}
+    	g.drawString(settingsText, settingsTextX, settingsTextY);
 
 			// Quit Button
     	if (isQuitButtonPressed) {
@@ -144,8 +170,8 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 	}
 
 	private void resetGame() {
-    alien.setxPos(235);
-    alien.setyPos(425);
+    alien.setxPos(124);
+    alien.setyPos(544);
 
     // Clear lists
     list.clear();
@@ -197,8 +223,10 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
       // Handle menu options
     	int playButtonX = getWidth() / 2 - 50;
       int playButtonY = getHeight() / 2 + 50;
-			int quitButtonX = playButtonX;
-			int quitButtonY = playButtonY + 50;
+			int settingsButtonX = playButtonX;
+			int settingsButtonY = playButtonY + 50;
+			int quitButtonX = settingsButtonX;
+      int quitButtonY = settingsButtonY + 50;
 
       int ButtonWidth = 100;
       int ButtonHeight = 40;
@@ -206,10 +234,13 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
       if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
 					e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
       	resetGame();
+			} else if (e.getX() >= settingsButtonX && e.getX() <= settingsButtonX + ButtonWidth &&
+					e.getY() >= settingsButtonY && e.getY() <= settingsButtonY + ButtonHeight) {
+				System.exit(0);
 			} else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
 					e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
 				System.exit(0);
-			}
+			} 	
 		}
   }
 
@@ -225,8 +256,10 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
   public void mousePressed(MouseEvent e) {
 		int playButtonX = getWidth() / 2 - 50;
     int playButtonY = getHeight() / 2 + 50;
-		int quitButtonX = playButtonX;
-		int quitButtonY = playButtonY + 50;
+		int settingsButtonX = playButtonX;
+		int settingsButtonY = playButtonY + 50;
+		int quitButtonX = settingsButtonX;
+    int quitButtonY = settingsButtonY + 50;
 		
     int ButtonWidth = 100;
     int ButtonHeight = 40;
@@ -234,10 +267,13 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
         e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
     	isPlayButtonPressed = true;
-    } else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
-        e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
-			isQuitButtonPressed = true;
-		}
+    } else if (e.getX() >= settingsButtonX && e.getX() <= settingsButtonX + ButtonWidth &&
+				e.getY() >= settingsButtonY && e.getY() <= settingsButtonY + ButtonHeight) {
+    	isSettingsButtonPressed = true;
+		} else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
+				e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
+    	isQuitButtonPressed = true;
+		} 	
 	}
 
 	@Override
@@ -246,6 +282,8 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     int playButtonY = getHeight() / 2 + 50;
 		int quitButtonX = playButtonX;
 		int quitButtonY = playButtonY + 50;
+		int settingsButtonX = quitButtonX;
+		int settingsButtonY = quitButtonY + 50;
 
     int ButtonWidth = 100;
     int ButtonHeight = 40;
@@ -253,15 +291,18 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
         e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
     	isPlayButtonPressed = false;
-    } else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
-        e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
-			isQuitButtonPressed = false;
-		}
+    } else if (e.getX() >= settingsButtonX && e.getX() <= settingsButtonX + ButtonWidth &&
+				e.getY() >= settingsButtonY && e.getY() <= settingsButtonY + ButtonHeight) {
+    	isSettingsButtonPressed = false;
+		} else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
+				e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
+    	isSettingsButtonPressed = false;
+		} 	
 	}
 
 	// Timer Listener to generate asteroids randomly
 	public class TimerListener implements ActionListener {
-		private int asteroidSpacing = 2; // Adjust the spacing between asteroids
+		private int asteroidSpacing = 3; // Adjust the spacing between asteroids
     private int counter = 0; // Counter for asteroidSpacing
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -269,7 +310,7 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 				counter++;
       	// Check if the counter has reached the desired spacing value
     		if (counter >= asteroidSpacing) {
-        	Integer x = random.nextInt(454);
+        	Integer x = random.nextInt(227);
 	      	list.add(new Asteroid(x));
         	counter = 0; // Reset the counter
       	}        
