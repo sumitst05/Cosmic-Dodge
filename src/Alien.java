@@ -52,8 +52,8 @@ public class Alien {
 
     public void moveDown() {
         yPos += 5;
-        if (yPos > 600) {
-            yPos = 600;
+        if (yPos > 554) {
+            yPos = 554;
         }
     }
 

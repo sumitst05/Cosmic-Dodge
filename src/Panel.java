@@ -78,7 +78,7 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 			inMenu = true;
 		}
 		
-		if(inMenu && !collision) g.drawImage(logo, 4, 145, 494, 90, null);	// show game logo
+		if(inMenu && !collision) g.drawImage(logo, 4, 145, 293, 180, null);	// show game logo
 
 		if (game_over || inMenu) {
 			
