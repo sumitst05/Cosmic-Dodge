@@ -28,9 +28,6 @@ You can just download the Cosmic-Dodge.jar executable jar file and run it.
 
 ![swappy-20230603_170508](https://github.com/sumitst05/Cosmic-Dodge/assets/106669732/3f67cc83-2cd5-443e-930f-c6b0a6449420)
 
-## Game Development
-The game is still under progress, and more features and improvements will be added in the future. 
-
 ## Link to Replit
 You can also play this game on Replit without having to clone the repository or downloading the jar file.
 Just follow this link : [Cosmic-Dodge](https://replit.com/@sumitst05/Cosmic-Dodge?v=1). (Just make sure to go full-screen before you run the repl). 
