@@ -14,8 +14,7 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 	private boolean inMenu = true;
 	private boolean isPlayButtonPressed = false;
 	private boolean isQuitButtonPressed = false;
-	private boolean isSettingsButtonPressed = false;
- 
+
 	// Initializing Objects
 	private Alien alien = new Alien();
 	private Timer timer = new Timer(timeInterval, new TimerListener());
@@ -84,10 +83,8 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 			
 			int playButtonX = getWidth() / 2 - 50;
       int playButtonY = getHeight() / 2 + 50;
-			int settingsButtonX = playButtonX;
-			int settingsButtonY = playButtonY + 50;
-			int quitButtonX = settingsButtonX;
-      int quitButtonY = settingsButtonY + 50;
+			int quitButtonX = playButtonX;
+      int quitButtonY = playButtonY + 50;
 			
       int ButtonWidth = 100;
       int ButtonHeight = 40;
@@ -102,12 +99,13 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 			g.fillRect(playButtonX, playButtonY, ButtonWidth, ButtonHeight);
     	g.drawRect(playButtonX, playButtonY, ButtonWidth, ButtonHeight);
 			g.setFont(new Font("Arial", Font.BOLD, 18));
+			
 			String playText = "Play";
 			int playTextWidth = g.getFontMetrics().stringWidth(playText);
 
       int playTextX = playButtonX + ButtonWidth / 2 - playTextWidth / 2; // Calculate the x-coordinate for centering the text
       int playTextY = playButtonY + ButtonHeight / 2 + 5; // Adjust the y-coordinate for centering the text
-
+			
 			if(isPlayButtonPressed) {
 				g.setColor(Color.RED);
 				inMenu = false;
@@ -116,28 +114,6 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 				g.setColor(Color.BLACK);
 			}
       g.drawString(playText, playTextX, playTextY);
-
-			// Settings Button
-    	if (isSettingsButtonPressed) {
-    		g.setColor(Color.WHITE);
-   		} else {
-      	g.setColor(Color.CYAN);
-    	}
-    	g.fillRect(settingsButtonX, settingsButtonY, ButtonWidth, ButtonHeight);
-    	g.drawRect(settingsButtonX, settingsButtonY, ButtonWidth, ButtonHeight);
-    	g.setFont(new Font("Arial", Font.BOLD, 18));
-    	String settingsText = "Settings";
-    	int settingsTextWidth = g.getFontMetrics().stringWidth(settingsText);
-    	int settingsTextX = settingsButtonX + ButtonWidth / 2 - settingsTextWidth / 2;
-    	int settingsTextY = settingsButtonY + ButtonHeight / 2 + 5;
-
-    	if (isSettingsButtonPressed) {
-      	g.setColor(Color.RED);
-				System.exit(0);
-    	} else {
-      	g.setColor(Color.BLACK);
-    	}
-    	g.drawString(settingsText, settingsTextX, settingsTextY);
 
 			// Quit Button
     	if (isQuitButtonPressed) {
@@ -148,11 +124,12 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     	g.fillRect(quitButtonX, quitButtonY, ButtonWidth, ButtonHeight);
     	g.drawRect(quitButtonX, quitButtonY, ButtonWidth, ButtonHeight);
     	g.setFont(new Font("Arial", Font.BOLD, 18));
-    	String quitText = "Quit";
+    	
+			String quitText = "Quit";
     	int quitTextWidth = g.getFontMetrics().stringWidth(quitText);
     	int quitTextX = quitButtonX + ButtonWidth / 2 - quitTextWidth / 2;
     	int quitTextY = quitButtonY + ButtonHeight / 2 + 5;
-
+			
     	if (isQuitButtonPressed) {
       	g.setColor(Color.RED);
 				System.exit(0);
@@ -185,7 +162,6 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
 		this.addKeyListener(this);
 		this.addMouseListener(this);
 	}
-
 
 	// Key Listener
 	@Override
@@ -223,10 +199,8 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
       // Handle menu options
     	int playButtonX = getWidth() / 2 - 50;
       int playButtonY = getHeight() / 2 + 50;
-			int settingsButtonX = playButtonX;
-			int settingsButtonY = playButtonY + 50;
-			int quitButtonX = settingsButtonX;
-      int quitButtonY = settingsButtonY + 50;
+			int quitButtonX = playButtonX;
+      int quitButtonY = playButtonY + 50;
 
       int ButtonWidth = 100;
       int ButtonHeight = 40;
@@ -234,13 +208,10 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
       if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
 					e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
       	resetGame();
-			} else if (e.getX() >= settingsButtonX && e.getX() <= settingsButtonX + ButtonWidth &&
-					e.getY() >= settingsButtonY && e.getY() <= settingsButtonY + ButtonHeight) {
-				System.exit(0);
 			} else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
 					e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
 				System.exit(0);
-			} 	
+			}
 		}
   }
 
@@ -256,10 +227,8 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
   public void mousePressed(MouseEvent e) {
 		int playButtonX = getWidth() / 2 - 50;
     int playButtonY = getHeight() / 2 + 50;
-		int settingsButtonX = playButtonX;
-		int settingsButtonY = playButtonY + 50;
-		int quitButtonX = settingsButtonX;
-    int quitButtonY = settingsButtonY + 50;
+		int quitButtonX = playButtonX;
+    int quitButtonY = playButtonY + 50;
 		
     int ButtonWidth = 100;
     int ButtonHeight = 40;
@@ -267,10 +236,7 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
         e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
     	isPlayButtonPressed = true;
-    } else if (e.getX() >= settingsButtonX && e.getX() <= settingsButtonX + ButtonWidth &&
-				e.getY() >= settingsButtonY && e.getY() <= settingsButtonY + ButtonHeight) {
-    	isSettingsButtonPressed = true;
-		} else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
+    } else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
 				e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
     	isQuitButtonPressed = true;
 		} 	
@@ -282,8 +248,6 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     int playButtonY = getHeight() / 2 + 50;
 		int quitButtonX = playButtonX;
 		int quitButtonY = playButtonY + 50;
-		int settingsButtonX = quitButtonX;
-		int settingsButtonY = quitButtonY + 50;
 
     int ButtonWidth = 100;
     int ButtonHeight = 40;
@@ -291,12 +255,9 @@ public class Panel extends JPanel implements KeyListener, MouseListener {
     if (e.getX() >= playButtonX && e.getX() <= playButtonX + ButtonWidth &&
         e.getY() >= playButtonY && e.getY() <= playButtonY + ButtonHeight) {
     	isPlayButtonPressed = false;
-    } else if (e.getX() >= settingsButtonX && e.getX() <= settingsButtonX + ButtonWidth &&
-				e.getY() >= settingsButtonY && e.getY() <= settingsButtonY + ButtonHeight) {
-    	isSettingsButtonPressed = false;
-		} else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
+    } else if (e.getX() >= quitButtonX && e.getX() <= quitButtonX + ButtonWidth &&
 				e.getY() >= quitButtonY && e.getY() <= quitButtonY + ButtonHeight) {
-    	isSettingsButtonPressed = false;
+    	isQuitButtonPressed = false;
 		} 	
 	}
 
