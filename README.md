@@ -2,7 +2,7 @@
 
 This is a space game created using Java, mainly using the java.awt and java.swing libraries. In this game, the player controls an alien that moves around in the game window. The objective is to dodge the randomly generated asteroids to survive as long as possible. The game ends when a collision between the alien and asteroid is detected.
 
-![swappy-20230602_221444](https://github.com/sumitst05/Cosmic-Dodge/assets/106669732/ad83319b-9204-4122-a546-0d639282d84f)
+![swappy-20230603_195042](https://github.com/sumitst05/Cosmic-Dodge/assets/106669732/2861d13b-718d-4e6c-aa94-07f6cd8853d8)
 
 ## Getting Started
 To run the game, you will need to have Java 8 or higher installed on your computer. 
