@@ -2,7 +2,7 @@
 
 This is a space game created using Java, mainly using the java.awt and java.swing libraries. In this game, the player controls an alien that moves around in the game window. The objective is to dodge the randomly generated asteroids to survive as long as possible. The game ends when a collision between the alien and asteroid is detected.
 
-![img](https://user-images.githubusercontent.com/106669732/219088546-effa0547-91f6-4b1c-a5fb-8b96dc549d83.png)
+![swappy-20230602_221444](https://github.com/sumitst05/Cosmic-Dodge/assets/106669732/ad83319b-9204-4122-a546-0d639282d84f)
 
 ## Getting Started
 To run the game, you will need to have Java 8 or higher installed on your computer. 
@@ -17,6 +17,10 @@ javac CosmicDodge.java
 java CosmicDodge
 ```
 
+OR
+
+You can just download the Cosmic-Dodge.jar executable jar file and run it.
+
 In case you get a blank window after compiling and running, make sure to move the .png files to the location where the .class files are generated.
 
 ## How to Play
@@ -24,13 +28,13 @@ In case you get a blank window after compiling and running, make sure to move th
 2. Dodge the randomly generated asteroids to avoid collision.
 3. The game ends when a collision is detected between the alien and an asteroid.
 
-https://user-images.githubusercontent.com/106669732/219088937-1af8e044-aff2-4ef9-8f5c-a9a8b4f80084.mp4
+![swappy-20230603_170508](https://github.com/sumitst05/Cosmic-Dodge/assets/106669732/3f67cc83-2cd5-443e-930f-c6b0a6449420)
 
 ## Game Development
 The game is still under progress, and more features and improvements will be added in the future. 
 
 ## Link to Replit
-You can also play this game on Replit without having to clone the repository.
+You can also play this game on Replit without having to clone the repository or downloading the jar file.
 Just follow this link : [Cosmic-Dodge](https://replit.com/@sumitst05/Cosmic-Dodge?v=1). (Just make sure to go full-screen before you run the repl). 
 Do like the repl if you liked the game! 😉
 
