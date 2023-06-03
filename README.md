@@ -21,8 +21,6 @@ OR
 
 You can just download the Cosmic-Dodge.jar executable jar file and run it.
 
-In case you get a blank window after compiling and running, make sure to move the .png files to the location where the .class files are generated.
-
 ## How to Play
 1. Use the arrow keys to control the movement of the alien.
 2. Dodge the randomly generated asteroids to avoid collision.
