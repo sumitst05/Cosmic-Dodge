@@ -59,8 +59,8 @@ public class Alien {
 
     public void moveRight() {
         xPos += 5;
-        if (xPos > 294) {
-            xPos = 294;
+        if (xPos > 254) {
+            xPos = 254;
         }
     }
 
